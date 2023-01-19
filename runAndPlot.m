@@ -43,6 +43,7 @@ JP = spdiags([e e e e e], -2:2, N, N); % Diagonal Laplacian
 F = @(t,U)r.*U-((qc.^4).*U+qc.^2.*Lap(U)+Lap(qc.^2.*U)+Bih(U)) -U.^3;
 
 %Initial condition.
+rng(1);
 uinit = 1e-4*randn(N,1);
 
 % Solve the system with given tolerances. 1e-8 good minimum, 1e-11 better.
