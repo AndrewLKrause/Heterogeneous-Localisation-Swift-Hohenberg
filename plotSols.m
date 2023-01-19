@@ -22,7 +22,7 @@ legend([p1,p2,p3],'$u$', '$r$','$q_c$', 'interpreter','latex')
 
 pI = find(homStab>0);
 if(nnz(pI)>0)
-    p4 = plot(x(pI),homStab(pI),'*','linewidth',2);
+    p4 = plot(x(pI),homStab(pI),'.','linewidth',2);
     legend([p1,p2,p3,p4],'$u$', '$r$','$q_c$','$r-q_c^4$', 'interpreter','latex')
 end
 figure
