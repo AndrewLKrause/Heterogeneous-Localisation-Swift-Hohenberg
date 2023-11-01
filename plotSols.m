@@ -1,34 +1,32 @@
 close all
 
-%p1 = plot(x,U(end,:),'-*','linewidth',2); hold on
- % Above is useful to see if enough grid points have been used.
-p1 = plot(x,U(end,:),'-','linewidth',2); hold on
-p2 = plot(x,r,'.','linewidth',2);
-p3 = plot(x,qc,'-.','linewidth',2);
+%pI = find(x< 0.51 & x > 0.49);
+pI = x>-1;
+p1 = plot(x(pI),U(end,pI),'-','linewidth',2); hold on
+%p2 = plot(x(pI),r(pI),'.','linewidth',2);
+%plot(x,qc,'-.','linewidth',2);
 ax = gca;
-%set(ax, 'fontsize', 16);
+set(ax, 'fontsize', 16);
 %legend('$u$', '$r(x)$', '$q_c(x)$', 'interpreter','latex')
 xlabel('$x$','interpreter','latex');
 
 axis tight;
 
+if(subcritical)
+    rc = ContinueFold(f, params);
+    Xs2 = AllZeros(@(x)rf(x)-rc, 0, 1, N);
+end
 
 Xs = AllZeros(rf, 0, 1, N);
+
 for i=1:length(Xs)
-    line([Xs(i),Xs(i)], ax.YLim,'linestyle','--','color','r','linewidth',2);
-    line([Xs(i),Xs(i)], ax.YLim,'linestyle','--','color','r','linewidth',2);
+    line([Xs(i),Xs(i)], ax.YLim,'linestyle','--','color','r','linewidth',1);
+    if(subcritical)
+        line([Xs2(i),Xs2(i)], ax.YLim,'linestyle','--','color','g','linewidth',1);
+    end
 end
-legend([p1,p2,p3],'$u$', '$r$','$q_c$', 'interpreter','latex')
-
-pI = find(homStab>0);
-if(nnz(pI)>0)
-    p4 = plot(x(pI),homStab(pI),'.','linewidth',2);
-    legend([p1,p2,p3,p4],'$u$', '$r$','$q_c$','$r-q_c^4$', 'interpreter','latex')
-end
-figure
-
-imagesc(flipud(U))
-
+%legend([p1,p2],'$u$', '$r(x)$', 'interpreter','latex')
+legend([p1], '$u$', 'interpreter','latex')
 function z=AllZeros(f,xmin,xmax,N)
 % Inputs :
 % f : function of one variable
@@ -47,7 +45,7 @@ for i=1:N
     x2=xmin+i*dx;
     y2=f(x2);
     if (y1*y2<=0)                              % Rolle's theorem : one zeros (or more) present
-        z=[z,fsolve(f,(x2*y1-x1*y2)/(y1-y2),optimoptions('fsolve','display','off'))]; % Linear approximation to guess the initial value in the [x1,x2] range.
+        z=[z,fsolve(f,(x2*y1-x1*y2)/(y1-y2))]; % Linear approximation to guess the initial value in the [x1,x2] range.
     end
 end
 end
