@@ -12,12 +12,6 @@ xlabel('$x$','interpreter','latex');
 
 axis tight;
 
-if(subcritical)
-    [rc, maxwellpt, rvec, Evec, Avec] = ContinuePlot(f, F, params);
-    Xs2 = AllZeros(@(x)rf(x)-rc, 0, 1, N);
-    Xs3 = AllZeros(@(x)rf(x)-maxwellpt, 0, 1, N);
-end
-
 Xs = AllZeros(rf, 0, 1, N);
 
 for i=1:length(Xs)
@@ -28,7 +22,7 @@ for i=1:length(Xs)
     end
 end
 %legend([p1,p2],'$u$', '$r(x)$', 'interpreter','latex')
-legend([p1], '$u$', 'interpreter','latex')
+%legend([p1], '$u$', 'interpreter','latex')
 function z=AllZeros(f,xmin,xmax,N)
 % Inputs :
 % f : function of one variable

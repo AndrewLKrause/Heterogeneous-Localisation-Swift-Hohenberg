@@ -8,44 +8,44 @@ U = U(end,:);
 ETol = 1e-7;
 
 while(max(U)-min(U) > 1e-5)
-    r = r-0.1;
+    r = r-0.05; r(1)
     Uold = U;
     U = RunSimulation(r, qc, f, params,U);
     U = U(end,:);
-    E = SHEnergy(U,F,r,params);
-    if(E<ETol)
-        re = r+0.1;
+    E = SHEnergy(U,F,r,params)
+    if(E>ETol)
+        re = r+0.05; re(1)
         Ue = Uold;
-        E = SHEnergy(Ue,F,re,params);
-        while(E>ETol)
-            re = re-0.01;
+        E = SHEnergy(Ue,F,re,params)
+        while(E<ETol)
+            re = re-0.01; re(1)
             Ueold = Ue;
             Ue = RunSimulation(re, qc, f, params,Ue);
             Ue = Ue(end,:);
-            E = SHEnergy(Ue,F,re,params);
+            E = SHEnergy(Ue,F,re,params)
         end
         re = re+0.01; Ue = Ueold;
         E = SHEnergy(Ue,F,re,params);
-        while(E>ETol)
-            re = re-0.001;
+        while(E<ETol)
+            re = re-0.001; re(1)
             Ueold = Ue;
             Ue = RunSimulation(re, qc, f, params,Ue);
             Ue = Ue(end,:);
-            E = SHEnergy(Ue,F,re,params);
+            E = SHEnergy(Ue,F,re,params)
         end
         maxwellpt = re(1)+0.0005;
     end
 end
-r = r+0.1; U = Uold;
+r = r+0.05; U = Uold;
 while(max(U)-min(U) > 1e-5)
-    r = r-0.01;
+    r = r-0.01; r(1)
     Uold = U;
     U = RunSimulation(r, qc, f, params,U);
     U = U(end,:);
 end
 r = r+0.01; U = Uold;
 while(max(U)-min(U) > 1e-5)
-    r = r-0.001;
+    r = r-0.001; r(1)
     U = RunSimulation(r, qc, f, params,U);
     U = U(end,:);
 end

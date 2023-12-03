@@ -1,15 +1,17 @@
 
 
 subcritical = 1; %Use this only if f is a homogeneous function with a subcritical instability and qc is 1.
-f = @(U)(1.5)*U.^3-1*U.^5;
-F = @(U)(1.5/4)*U.^4-(1/6)*U.^6;
+%f = @(U)(1.5)*U.^3-1*U.^5;
+%F = @(U)(1.5/4)*U.^4-(1/6)*U.^6;
+f = @(U)2*U.^2-U.^3;
+F = @(U)(2/3)*U.^3-(1/4)*U.^4;
 
-N = 8000; eps = 4e-4; T = [0,linspace(100,5000,2e3)];
+N = 10000; eps = 1e-4; T = [0,linspace(100,5000,1e2)];
 dx = 1/(N-1); % Spacing between grid points
 params.dx = dx; params.N = N; params.eps = eps; params.T = T;
 params.tol = 1e-9; 
 x = linspace(0,1,N)'; 
-rf = @(x)x*0-0.8*(cos(2*pi*x));
+rf = @(x)-cos(2*pi*x);
 r = rf(x);
 
 Q = @(x)x*0+1;
@@ -17,5 +19,14 @@ qc = Q(x);
 
 U = RunSimulation(r, qc, f, params,1e-2*randn(params.N,1));
 
-params.T = [0,linspace(1e3,1e5,5)];
+
+if(subcritical && ~exist('rc'))
+    params.T = [0,linspace(1e3,1e5,5)];
+    [rc, maxwellpt] = ContinueFold(f, F, params);
+    Xs2 = AllZeros(@(x)rf(x)-rc, 0, 1, N);
+    Xs3 = AllZeros(@(x)rf(x)-maxwellpt, 0, 1, N);
+end
+
+
+
 plotSols;
