@@ -13,8 +13,9 @@ xlabel('$x$','interpreter','latex');
 axis tight;
 
 if(subcritical)
-    rc = ContinueFold(f, params);
+    [rc, maxwellpt, rvec, Evec, Avec] = ContinuePlot(f, F, params);
     Xs2 = AllZeros(@(x)rf(x)-rc, 0, 1, N);
+    Xs3 = AllZeros(@(x)rf(x)-maxwellpt, 0, 1, N);
 end
 
 Xs = AllZeros(rf, 0, 1, N);
@@ -23,6 +24,7 @@ for i=1:length(Xs)
     line([Xs(i),Xs(i)], ax.YLim,'linestyle','--','color','r','linewidth',1);
     if(subcritical)
         line([Xs2(i),Xs2(i)], ax.YLim,'linestyle','--','color','g','linewidth',1);
+        line([Xs3(i),Xs3(i)], ax.YLim,'linestyle','--','color','b','linewidth',1);
     end
 end
 %legend([p1,p2],'$u$', '$r(x)$', 'interpreter','latex')
@@ -32,6 +34,7 @@ function z=AllZeros(f,xmin,xmax,N)
 % f : function of one variable
 % [xmin - xmax] : range where f is continuous containing zeros
 % N : control of the minimum distance (xmax-xmin)/N between two zeros
+options = optimset('Display','off');
 if (nargin<4)
     N=100;
 end
@@ -45,7 +48,7 @@ for i=1:N
     x2=xmin+i*dx;
     y2=f(x2);
     if (y1*y2<=0)                              % Rolle's theorem : one zeros (or more) present
-        z=[z,fsolve(f,(x2*y1-x1*y2)/(y1-y2))]; % Linear approximation to guess the initial value in the [x1,x2] range.
+        z=[z,fsolve(f,(x2*y1-x1*y2)/(y1-y2),options)]; % Linear approximation to guess the initial value in the [x1,x2] range.
     end
 end
 end
