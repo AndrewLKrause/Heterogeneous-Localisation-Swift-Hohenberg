@@ -1,0 +1,109 @@
+% % clear
+% % f = @(U)1.5*U.^3-U.^5;
+% % F = @(U)1.5/4*U.^4-(1/6)*U.^6;
+% % eps = 1e-2;
+% % runAndPlot
+% % saveas(gcf,'f1.5u^3-u^5_r-cos2pix_eps1e-2.png')
+% % save('Data/f1.5u^3-u^5_r-cos2pix_eps1e-2.mat')
+% % pause(0.1)
+% % 
+% % clear
+% % f = @(U)1.5*U.^3-U.^5;
+% % F = @(U)1.5/4*U.^4-(1/6)*U.^6;
+% % eps = 1e-3;
+% % runAndPlot
+% % saveas(gcf,'f1.5u^3-u^5_r-cos2pix_eps1e-3.png')
+% % save('Data/f1.5u^3-u^5_r-cos2pix_eps1e-3.mat')
+% % pause(0.1)
+% % 
+% % clear
+% % f = @(U)1.5*U.^3-U.^5;
+% % F = @(U)1.5/4*U.^4-(1/6)*U.^6;
+% % eps = 5e-4;
+% % runAndPlot
+% % saveas(gcf,'f1.5u^3-u^5_r-cos2pix_eps5e-4.png')
+% % save('Data/f1.5u^3-u^5_r-cos2pix_eps5e-4.mat')
+% % pause(0.1)
+% % 
+% % 
+% % clear
+% % f = @(U)2*U.^2-U.^3;
+% % F = @(U)(2/3)*U.^3-(1/4)*U.^4;
+% % eps = 1e-2;
+% % runAndPlot
+% % saveas(gcf,'f2u^2-u^3_r-cos2pix_eps1e-2.png')
+% % save('Data/f2u^2-u^3_r-cos2pix_eps1e-2.mat')
+% % pause(0.1)
+% % 
+% % clear
+% % f = @(U)2*U.^2-U.^3;
+% % F = @(U)(2/3)*U.^3-(1/4)*U.^4;
+% % eps = 1e-3;
+% % runAndPlot
+% % saveas(gcf,'f2u^2-u^3_r-cos2pix_eps1e-3.png')
+% % save('Data/f2u^2-u^3_r-cos2pix_eps1e-3.mat')
+% % pause(0.1)
+% % 
+% % clear
+% % f = @(U)2*U.^2-U.^3;
+% % F = @(U)(2/3)*U.^3-(1/4)*U.^4;
+% % eps = 5e-4;
+% % runAndPlot
+% % saveas(gcf,'f2u^2-u^3_r-cos2pix_eps5e-4.png')
+% % save('Data/f2u^2-u^3_r-cos2pix_eps5e-4.mat')
+% % pause(0.1)
+% 
+% 
+% clear
+% f = @(U)1*U.^3-U.^7;
+% F = @(U)1/4*U.^4-(1/8)*U.^8;
+% eps = 1e-2;
+% runAndPlot
+% saveas(gcf,'fu^3-u^7_r-cos2pix_eps1e-2.png')
+% save('Data/fu^3-u^7_r-cos2pix_eps1e-2.mat')
+% pause(0.1)
+% 
+% clear
+% f = @(U)1*U.^3-U.^7;
+% F = @(U)1/4*U.^4-(1/8)*U.^8;
+% eps = 1e-3;
+% runAndPlot
+% saveas(gcf,'fu^3-u^7_r-cos2pix_eps1e-3.png')
+% save('Data/fu^3-u^7_r-cos2pix_eps1e-3.mat')
+% pause(0.1)
+% 
+% clear
+% f = @(U)1*U.^3-U.^7;
+% F = @(U)1/4*U.^4-(1/8)*U.^8;
+% eps = 5e-4;
+% runAndPlot
+% saveas(gcf,'fu^3-u^7_r-cos2pix_eps5e-4.png')
+% save('Data/fu^3-u^7_r-cos2pix_eps5e-4.mat')
+% pause(0.1)
+% 
+clear
+f = @(U)1*U.^3-U.^7;
+F = @(U)1/4*U.^4-(1/8)*U.^8;
+eps = 1e-2;
+runAndPlot
+saveas(gcf,'fu^3-u^7_r-0.4cos2pix_eps1e-2.png')
+save('Data/fu^3-u^7_r-0.4cos2pix_eps1e-2.mat')
+pause(0.1)
+
+clear
+f = @(U)1*U.^3-U.^7;
+F = @(U)1/4*U.^4-(1/8)*U.^8;
+eps = 1e-3;
+runAndPlot
+saveas(gcf,'fu^3-u^7_r-0.4cos2pix_eps1e-3.png')
+save('Data/fu^3-u^7_r-0.4cos2pix_eps1e-3.mat')
+pause(0.1)
+
+clear
+f = @(U)1*U.^3-U.^7;
+F = @(U)1/4*U.^4-(1/8)*U.^8;
+eps = 5e-4;
+runAndPlot
+saveas(gcf,'fu^3-u^7_r-0.4cos2pix_eps5e-4.png')
+save('Data/fu^3-u^7_r-0.2cos2pix_eps5e-4.mat')
+pause(0.1)
