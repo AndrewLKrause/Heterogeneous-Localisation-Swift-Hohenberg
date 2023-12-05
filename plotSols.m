@@ -1,8 +1,11 @@
 close all
-
+h = figure;
+h.Position(1) = 0;
+h.Position(2) = 0;
+h.Position(3) = 1.5*h.Position(3); h.Position(4)=1.5*h.Position(4);
 %pI = find(x< 0.51 & x > 0.49);
 pI = x>-1;
-p1 = plot(x(pI),U(end,pI),'-','linewidth',2); hold on
+p1 = plot(x(pI),U(end,pI),'-','linewidth',1); hold on
 %p2 = plot(x(pI),r(pI),'.','linewidth',2);
 %plot(x,qc,'-.','linewidth',2);
 ax = gca;

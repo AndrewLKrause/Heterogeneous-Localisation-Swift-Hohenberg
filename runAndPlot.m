@@ -1,6 +1,6 @@
 %clear
 rng(1);
-subcritical = 1; %Use this only if f is a homogeneous function with a subcritical instability and qc is 1.
+%subcritical = 1; %Use this only if f is a homogeneous function with a subcritical instability and qc is 1.
 %f = @(U)1.5*U.^3-1*U.^5;
 %F = @(U)1.5/4*U.^4-(1/6)*U.^6;
 % f = @(U)2*U.^2-U.^3;
