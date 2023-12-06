@@ -218,7 +218,7 @@ close all; save('Data/fu^3-u^7_r-0.4cos10pixsinsqrt20pix_eps2e-4.mat')
 pause(0.1)
 
 
-DO THIS ONE NEXT: 
+%DO THIS ONE NEXT: 
 
 clear
 f = @(U)-U.^3;subcritical = 0;
