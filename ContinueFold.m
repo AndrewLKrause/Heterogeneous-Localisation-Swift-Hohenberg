@@ -27,7 +27,7 @@ U = RunSimulation(r, qc, f, params,Us');U = U(end,:);
 
 params.T = [0,TEnd];
 ETol = 1e-7;
-
+maxwellpt=0;
 while(max(U)-min(U) > 1e-5)
     r = r-0.05; r(1)
     Uold = U;
@@ -35,26 +35,25 @@ while(max(U)-min(U) > 1e-5)
     Us = fsolve(@(U)FRHS(U,r),U',options);
     U = RunSimulation(r, qc, f, params,Us');U = U(end,:);
     E = SHEnergy(U,F,r,params)
-    if(E>ETol)
+    if(E>ETol && maxwellpt==0)
         re = r+0.05; re(1)
         Ue = Uold;
         E = SHEnergy(Ue,F,re,params)
         while(E<ETol)
             re = re-0.01; re(1)
             Ueold = Ue;
-            Ue = RunSimulation(r, qc, f, params,Ue);Ue = Ue(end,:);
-            Us = fsolve(@(U)FRHS(U,r),Ue',options);
-            Ue = RunSimulation(r, qc, f, params,Us');Ue = Ue(end,:);
+            Ue = RunSimulation(re, qc, f, params,Ue);Ue = Ue(end,:);
+            Us = fsolve(@(U)FRHS(U,re),Ue',options);
+            Ue = RunSimulation(re, qc, f, params,Us');Ue = Ue(end,:);
             E = SHEnergy(Ue,F,re,params)
         end
         re = re+0.01; Ue = Ueold;
         E = SHEnergy(Ue,F,re,params);
         while(E<ETol)
             re = re-0.001; re(1)
-            Ueold = Ue;
-            Ue = RunSimulation(r, qc, f, params,Ue);Ue = Ue(end,:);
-            Us = fsolve(@(U)FRHS(U,r),Ue',options);
-            Ue = RunSimulation(r, qc, f, params,Us');Ue = Ue(end,:);
+            Ue = RunSimulation(re, qc, f, params,Ue);Ue = Ue(end,:);
+            Us = fsolve(@(U)FRHS(U,re),Ue',options);
+            Ue = RunSimulation(re, qc, f, params,Us');Ue = Ue(end,:);
             E = SHEnergy(Ue,F,re,params)
         end
         maxwellpt = re(1)+0.0005;
@@ -62,7 +61,7 @@ while(max(U)-min(U) > 1e-5)
 end
 r = r+0.05; U = Uold;
 while(max(U)-min(U) > 1e-5)
-    r = r-0.01; r(1)
+    r = r-0.01; r(1);
     Uold = U;
     U = RunSimulation(r, qc, f, params,U);U = U(end,:);
     Us = fsolve(@(U)FRHS(U,r),U',options);
@@ -70,7 +69,7 @@ while(max(U)-min(U) > 1e-5)
 end
 r = r+0.01; U = Uold;
 while(max(U)-min(U) > 1e-5)
-    r = r-0.001; r(1)
+    r = r-0.001; r(1);
     U = RunSimulation(r, qc, f, params,U);U = U(end,:);
     Us = fsolve(@(U)FRHS(U,r),U',options);
     U = RunSimulation(r, qc, f, params,Us');U = U(end,:);
